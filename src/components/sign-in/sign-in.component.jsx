@@ -1,60 +1,79 @@
 import React from 'react';
+import FacebookLogin from 'react-facebook-login';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 import './sign-in.styles.scss';
 
 class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      email: '',
-      password: ''
+        this.state = {
+            email: '',
+            password: '',
+        };
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        this.setState({ email: '', password: '' });
     };
-  }
 
-  handleSubmit = event => {
-    event.preventDefault();
+    handleChange = (event) => {
+        const { value, name } = event.target;
 
-    this.setState({ email: '', password: '' });
-  };
+        this.setState({ [name]: value });
+    };
 
-  handleChange = event => {
-    const { value, name } = event.target;
+    responseFacebook = (response) => {
+        console.log({ response });
+    };
 
-    this.setState({ [name]: value });
-  };
+    render() {
+        return (
+            <div className="sign-in">
+                <h2>I already have an account</h2>
+                <span>Sign in with your email and password</span>
 
-  render() {
-    return (
-      <div className='sign-in'>
-        <h2>I already have an account</h2>
-        <span>Sign in with your email and password</span>
-
-        <form onSubmit={this.handleSubmit}>
-          <FormInput
-            name='email'
-            type='email'
-            handleChange={this.handleChange}
-            value={this.state.email}
-            label='email'
-            required
-          />
-          <FormInput
-            name='password'
-            type='password'
-            value={this.state.password}
-            handleChange={this.handleChange}
-            label='password'
-            required
-          />
-          <CustomButton type='submit'> Sign in </CustomButton>
-        </form>
-      </div>
-    );
-  }
+                <form onSubmit={this.handleSubmit}>
+                    <FormInput
+                        name="email"
+                        type="email"
+                        handleChange={this.handleChange}
+                        value={this.state.email}
+                        label="email"
+                        required
+                    />
+                    <FormInput
+                        name="password"
+                        type="password"
+                        value={this.state.password}
+                        handleChange={this.handleChange}
+                        label="password"
+                        required
+                    />
+                    <div className="buttons">
+                        <CustomButton type="submit"> Sign in </CustomButton>
+                        <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+                            Sign in with Google
+                        </CustomButton>
+                        <FacebookLogin
+                            className="FacebookLogin"
+                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            callback={this.responseFacebook}
+                        />
+                    </div>
+                </form>
+            </div>
+        );
+    }
 }
 
 export default SignIn;
