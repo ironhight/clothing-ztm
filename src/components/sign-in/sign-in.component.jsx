@@ -6,9 +6,9 @@ import CustomButton from '../custom-button/custom-button.component';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
-import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin } from 'react-google-login';
-import * as axios from 'axios';
+// import FacebookLogin from 'react-facebook-login';
+// import { GoogleLogin } from 'react-google-login';
+// import * as axios from 'axios';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -32,31 +32,27 @@ class SignIn extends React.Component {
         this.setState({ [name]: value });
     };
 
-    responseFacebook = (response) => {
-        console.log({ response });
-    };
+    // responseFacebook = async res => {
+    //     const rs = await axios.post(`${process.env.REACT_APP_HOST_API}/auth/customers/login/facebook`, {
+    //         accessToken: res.accessToken
+    //     })
 
-    responseFacebook = async res => {
-        const rs = await axios.post(`${process.env.REACT_APP_HOST_API}/auth/customers/login/facebook`, {
-            accessToken: res.accessToken
-        })
+    //     if(!rs.data.status) return
+    //     window.localStorage.setItem('token', JSON.stringify(rs.data.data))  
+    // };
 
-        if(!rs.data.status) return
-        window.localStorage.setItem('token', JSON.stringify(rs.data.data))  
-    };
+    // onFailure = (error) => {
+    //     console.log("🚀 ~ file: sign-in.component.jsx ~ line 49 ~ SignIn ~ error", error)
+    // };
 
-    onFailure = (error) => {
-        console.log("🚀 ~ file: sign-in.component.jsx ~ line 49 ~ SignIn ~ error", error)
-    };
+    // googleResponse =  async res => {
+    //     const rs = await axios.post(`${process.env.REACT_APP_HOST_API}/auth/customers/login/google`, {
+    //         accessToken: res.accessToken
+    //     })
 
-    googleResponse =  async res => {
-        const rs = await axios.post(`${process.env.REACT_APP_HOST_API}/auth/customers/login/google`, {
-            accessToken: res.accessToken
-        })
-
-        if(!rs.data.status) return
-        window.localStorage.setItem('token', JSON.stringify(rs.data.data))  
-    }
+    //     if(!rs.data.status) return
+    //     window.localStorage.setItem('token', JSON.stringify(rs.data.data))  
+    // }
 
     render() {
         return (
@@ -86,7 +82,7 @@ class SignIn extends React.Component {
                         <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
                             Sign in with Google
                         </CustomButton>
-                        <FacebookLogin
+                        {/* <FacebookLogin
                             appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                             autoLoad={false}
                             fields="name,email,picture"
@@ -98,7 +94,7 @@ class SignIn extends React.Component {
                             buttonText="Login"
                             onSuccess={this.googleResponse}
                             onFailure={this.onFailure}
-                        />
+                        /> */}
                     </div>
                 </form>
             </div>
