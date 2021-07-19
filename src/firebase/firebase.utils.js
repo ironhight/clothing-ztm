@@ -72,7 +72,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 export const getCurrentUser = () => {
 	return new Promise((resolve, reject) => {
 		const unsubscribe = auth.onAuthStateChanged((userAuth) => {
-			unsubscribe();
+			unsubscribe(); // this equivalent to componentWillUnmount in App.js
 			resolve(userAuth);
 		}, reject);
 	});
