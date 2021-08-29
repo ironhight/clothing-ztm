@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-	apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
-	authDomain: 'crwn-db.firebaseapp.com',
-	databaseURL: 'https://crwn-db.firebaseio.com',
-	projectId: 'crwn-db',
-	storageBucket: 'crwn-db.appspot.com',
-	messagingSenderId: '850995411664',
-	appId: '1:850995411664:web:7ddc01d597846f65',
+	apiKey: 'AIzaSyCsSllX8C1g05HoX1tZrRMuN9J8gumFdGE',
+	authDomain: 'complete-react-ztm.firebaseapp.com',
+	projectId: 'complete-react-ztm',
+	storageBucket: 'complete-react-ztm.appspot.com',
+	messagingSenderId: '49333481603',
+	appId: '1:49333481603:web:a4cb6f27472984497cebb6',
+	measurementId: 'G-KMN1V16RED',
 };
 
 firebase.initializeApp(config);
@@ -50,6 +50,15 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 
 	return await batch.commit();
 };
+
+/*
+// Function call to add shopping data to firebase database
+
+addCollectionAndDocuments(
+	'collections',
+	SHOP_DATA.map(({ title, items }) => ({ title, items })),
+);
+*/
 
 export const convertCollectionsSnapshotToMap = (collections) => {
 	const transformedCollection = collections.docs.map((doc) => {

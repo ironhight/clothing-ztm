@@ -25,6 +25,7 @@ export const fetchCollectionsStartAsync = () => {
 			.get()
 			.then((snapshot) => {
 				const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+				console.log('🚀 ~ file: shop.actions.js ~ line 28 ~ .then ~ collectionsMap', collectionsMap);
 				dispatch(fetchCollectionsSuccess(collectionsMap));
 			})
 			.catch((error) => dispatch(fetchCollectionsFailure(error.message)));
